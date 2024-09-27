@@ -14,11 +14,11 @@ public class LoginPage extends Header {
 
     // локатор ссылки "Зарегистрироваться"
     @FindBy(how = How.XPATH, using = "//a[text()='Зарегистрироваться']")
-    private SelenideElement REGISTER_LINK;
+    private SelenideElement registerLink;
 
     // локатор поля ввода email
     @FindBy(how = How.XPATH, using = "//input[@name='name']")
-    private SelenideElement EMAIL_INPUT_FIELD;
+    private SelenideElement emailInputField;
 
     // локатор поля ввода пароля
     @FindBy(how = How.XPATH, using = "//input[@name='Пароль']")
@@ -33,13 +33,13 @@ public class LoginPage extends Header {
     private SelenideElement PASSWORD_RECOVERY_LINK;
 
     public void clickRegisterLink() {
-        REGISTER_LINK.click();
+        registerLink.click();
     }
 
     public void setEmail(String email) {
         // баг с анимацией
-        while (!Objects.equals(EMAIL_INPUT_FIELD.getValue(), email)) {
-            EMAIL_INPUT_FIELD.shouldBe(Condition.editable).setValue(email);
+        while (!Objects.equals(emailInputField.getValue(), email)) {
+            emailInputField.shouldBe(Condition.editable).setValue(email);
         }
     }
 

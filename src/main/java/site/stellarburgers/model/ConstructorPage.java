@@ -9,33 +9,33 @@ public class ConstructorPage {
 
     // локатор таба "Булки"
     @FindBy(how = How.XPATH, using = "//div[span[text()='Булки']]")
-    private SelenideElement BUN_TAB;
+    private SelenideElement  bunTab;
 
     // локатор таба "Соусы"
     @FindBy(how = How.XPATH, using = "//div[span[text()='Соусы']]")
-    private SelenideElement SAUCE_TAB;
+    private SelenideElement sauceTab;
 
     // локатор таба "Начинки"
     @FindBy(how = How.XPATH, using = "//div[span[text()='Начинки']]")
-    private SelenideElement FILLING_TAB;
+    private SelenideElement fillingTab;
 
     public void clickSauceTab() {
-        SAUCE_TAB.click();
+        sauceTab.click();
     }
 
     public void clickFillingTab() {
-        FILLING_TAB.click();
+        fillingTab.click();
     }
 
     public boolean checkIsBunTabSelected() {
-        return BUN_TAB.getAttribute("class").contains("current");
+        return  bunTab.getAttribute("class").contains("current");
     }
 
     public boolean checkIsSauceTabSelected() {
-        return SAUCE_TAB.getAttribute("class").contains("current");
+        return sauceTab.getAttribute("class").contains("current");
     }
 
     public boolean checkIsFillingTabSelected() {
-        return FILLING_TAB.getAttribute("class").contains("current");
+        return fillingTab.getAttribute("class").contains("current");
     }
 }

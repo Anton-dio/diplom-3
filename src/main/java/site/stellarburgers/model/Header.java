@@ -9,29 +9,29 @@ public class Header {
 
     // локатор ссылки "Конструктор"
     @FindBy(how = How.XPATH, using = "//a[@class='AppHeader_header__link__3D_hX' and @href='/']")
-    protected SelenideElement CONSTRUCTOR_LINK;
+    protected SelenideElement constructorLink;
 
     // локатор ссылки-логотипа
     @FindBy(how = How.CSS, using = "div.AppHeader_header__logo__2D0X2")
-    protected SelenideElement LOGO_LINK;
+    protected SelenideElement logoLinc;
 
     // локатор ссылки "Личный кабинет"
     @FindBy(how = How.XPATH, using = "//a[@href='/account']")
-    protected SelenideElement PERSONAL_ACCOUNT_LINK;
+    protected SelenideElement personalAccountLinc;
 
     @Step("Переход на страницу конструктора")
     public void clickConstructorLink() {
-        CONSTRUCTOR_LINK.click();
+        constructorLink.click();
     }
 
     @Step("Переход на главную страницу")
     public void clickLogoLink() {
-        LOGO_LINK.click();
+        logoLinc.click();
     }
 
     @Step("Переход на страницу логина через ссылку 'Личный кабинет'")
     public void clickPersonalAccountLink() {
-        PERSONAL_ACCOUNT_LINK.click();
+        personalAccountLinc.click();
     }
 
 
