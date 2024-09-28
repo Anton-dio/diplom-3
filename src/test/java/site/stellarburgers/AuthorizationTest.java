@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static site.stellarburgers.Browser.browserChoice;
 import static site.stellarburgers.Browser.closeNotChromeBrowser;
 import static site.stellarburgers.generator.UserGenerator.*;
+import static site.stellarburgers.generator.UserApi.*;
 
 @RunWith(JUnitParamsRunner.class)
 @DisplayName("Авторизация")
@@ -21,9 +22,12 @@ public class AuthorizationTest {
     PasswordRecoveryPage passwordRecoveryPage;
     PersonalAccountPage personalAccountPage;
 
+    private static User user;
+
     @BeforeClass
     public static void beforeAll() {
         browserChoice();
+        user = createUser(new User(WORKING_EMAIL, DEFAULT_PASSWORD, DEFAULT_NAME));
     }
 
     @Before
@@ -42,6 +46,7 @@ public class AuthorizationTest {
 
     @AfterClass
     public static void afterAll() {
+        deleteUser(user.getEmail());
         closeNotChromeBrowser();
     }
 

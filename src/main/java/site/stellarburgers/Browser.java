@@ -68,10 +68,4 @@ public class Browser {
             closeWebDriver();
         }
     }
-
-    public static void main(String[] args) {
-        browserChoice();
-        // Ваш код для тестирования
-        closeNotChromeBrowser();
-    }
 }

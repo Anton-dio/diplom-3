@@ -9,11 +9,11 @@ public class PasswordRecoveryPage extends Header {
 
     // локатор ссылки "Войти"
     @FindBy(how = How.XPATH, using = "//a[text()='Войти']")
-    private SelenideElement SIGN_IN_LINK;
+    private SelenideElement signInLink;
 
 
     @Step("Переход на страницу логина через ссылку 'Войти'")
     public void clickSignInLink() {
-        SIGN_IN_LINK.click();
+        signInLink.click();
     }
 }

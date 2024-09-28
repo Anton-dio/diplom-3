@@ -21,11 +21,13 @@ public class Header {
 
     @Step("Переход на страницу конструктора")
     public void clickConstructorLink() {
+
         constructorLink.click();
     }
 
     @Step("Переход на главную страницу")
     public void clickLogoLink() {
+
         logoLinc.click();
     }
 

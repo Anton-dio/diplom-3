@@ -22,15 +22,15 @@ public class LoginPage extends Header {
 
     // локатор поля ввода пароля
     @FindBy(how = How.XPATH, using = "//input[@name='Пароль']")
-    private SelenideElement PASSWORD_INPUT_FIELD;
+    private SelenideElement passwordInpuField;
 
     // локатор кнопки "Войти"
     @FindBy(how = How.XPATH, using = "//button[text()='Войти']")
-    private SelenideElement SIGN_IN_BUTTON;
+    private SelenideElement signInButton;
 
     // локатор ссылки "Восстановить пароль"
     @FindBy(how = How.XPATH, using = "//a[text()='Восстановить пароль']")
-    private SelenideElement PASSWORD_RECOVERY_LINK;
+    private SelenideElement passwordRecoveryLink;
 
     public void clickRegisterLink() {
         registerLink.click();
@@ -44,11 +44,11 @@ public class LoginPage extends Header {
     }
 
     public void setPassword(String password) {
-        PASSWORD_INPUT_FIELD.setValue(password);
+        passwordInpuField.setValue(password);
     }
 
     public void clickSignInButton() {
-        SIGN_IN_BUTTON.click();
+        signInButton.click();
     }
 
     @Step("Логин пользователя")
@@ -60,7 +60,7 @@ public class LoginPage extends Header {
 
     @Step("Переход на страницу восстановления пароля")
     public void clickPasswordRecoveryLink() {
-        PASSWORD_RECOVERY_LINK.click();
+        passwordRecoveryLink.click();
     }
 
 }

@@ -28,10 +28,12 @@ public class ConstructorPage {
     }
 
     public boolean checkIsBunTabSelected() {
+
         return  bunTab.getAttribute("class").contains("current");
     }
 
     public boolean checkIsSauceTabSelected() {
+
         return sauceTab.getAttribute("class").contains("current");
     }
 

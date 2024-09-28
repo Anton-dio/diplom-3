@@ -9,13 +9,13 @@ public class PersonalAccountPage {
 
     // локатор кнопки "Выйти"
     @FindBy(how = How.XPATH, using = "//button[text()='Выход']")
-    private SelenideElement SIGN_OUT_BUTTON;
+    private SelenideElement signOutButton;
 
 
 
     @Step("Выход из аккаунта")
     public void clickSignOutButton() {
-        SIGN_OUT_BUTTON.click();
+        signOutButton.click();
     }
 
 }

@@ -1,9 +1,7 @@
 package site.stellarburgers;
 
 import io.qameta.allure.junit4.DisplayName;
-import junitparams.JUnitParamsRunner;
 import org.junit.*;
-import org.junit.runner.RunWith;
 import site.stellarburgers.model.ConstructorPage;
 import site.stellarburgers.model.MainPage;
 
@@ -11,7 +9,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static site.stellarburgers.Browser.browserChoice;
 import static site.stellarburgers.Browser.closeNotChromeBrowser;
 
-@RunWith(JUnitParamsRunner.class)
+
 @DisplayName("Вкладки конструктора")
 public class SectionsTest {
 
@@ -40,17 +38,20 @@ public class SectionsTest {
     }
 
     @Test
+    @DisplayName("Проверка работы вкладки «Булки»")
     public void bunTabValidWorking() {
         Assert.assertTrue(constructorPage.checkIsBunTabSelected());
     }
 
     @Test
+    @DisplayName("Проверка работы вкладки «Соусы»")
     public void sauceTabValidWorking() {
         constructorPage.clickSauceTab();
         Assert.assertTrue(constructorPage.checkIsSauceTabSelected());
     }
 
     @Test
+    @DisplayName("Проверка работы вкладки «Начинки»")
     public void fillingTabValidWorking() {
         constructorPage.clickFillingTab();
         Assert.assertTrue(constructorPage.checkIsFillingTabSelected());
