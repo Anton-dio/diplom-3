@@ -63,4 +63,7 @@ public class RegistrationPage extends Header {
     public void clickSignInLink() {
         signInLink.click();
     }
+
+    public void deleteUser(String newEmail) {
+    }
 }

@@ -22,7 +22,7 @@ public class AuthorizationTest {
     PasswordRecoveryPage passwordRecoveryPage;
     PersonalAccountPage personalAccountPage;
 
-    private static User user;
+    private static int user;
 
     @BeforeClass
     public static void beforeAll() {
@@ -46,8 +46,11 @@ public class AuthorizationTest {
 
     @AfterClass
     public static void afterAll() {
-        deleteUser(user.getEmail());
+        deleteUser(user);
         closeNotChromeBrowser();
+    }
+
+    private static void deleteUser(int user) {
     }
 
     @Test

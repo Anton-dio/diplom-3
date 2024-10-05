@@ -41,6 +41,8 @@ public class RegisterUserTest {
 
     @After
     public void tearDown(){
+        // Удаление пользователя после каждого теста
+        registrationPage.deleteUser(newEmail);
         clearBrowserLocalStorage();
     }
 
