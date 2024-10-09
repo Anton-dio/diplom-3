@@ -4,6 +4,8 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,22 +15,24 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class Browser {
 
+    private static final Logger logger = LoggerFactory.getLogger(Browser.class);
+
     public static String getBrowser() {
         // Проверка командного флага
         String browser = System.getProperty("browser");
-        if (browser != null) {
+        if (browser != null && !browser.isEmpty()) {
             return browser;
         }
 
         // Проверка системной проперти
         browser = System.getProperty("BROWSER");
-        if (browser != null) {
+        if (browser != null && !browser.isEmpty()) {
             return browser;
         }
 
         // Проверка переменной окружения
         browser = System.getenv("BROWSER");
-        if (browser != null) {
+        if (browser != null && !browser.isEmpty()) {
             return browser;
         }
 
@@ -37,11 +41,11 @@ public class Browser {
         try (FileInputStream fis = new FileInputStream("config.properties")) {
             properties.load(fis);
             browser = properties.getProperty("browser");
-            if (browser != null) {
+            if (browser != null && !browser.isEmpty()) {
                 return browser;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("config.properties file not found: " + e.getMessage());
         }
 
         // Значение по умолчанию
@@ -59,6 +63,8 @@ public class Browser {
             System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
             WebDriver chromeDriver = new ChromeDriver();
             WebDriverRunner.setWebDriver(chromeDriver);
+        } else {
+            throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
     }
 
