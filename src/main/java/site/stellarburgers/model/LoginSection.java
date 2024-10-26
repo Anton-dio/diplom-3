@@ -8,27 +8,22 @@ import org.openqa.selenium.support.How;
 
 import java.util.Objects;
 
-public class LoginPage extends Header {
+public class LoginSection extends HeaderSection {
 
     public final static String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
 
-    // локатор ссылки "Зарегистрироваться"
     @FindBy(how = How.XPATH, using = "//a[text()='Зарегистрироваться']")
     private SelenideElement registerLink;
 
-    // локатор поля ввода email
     @FindBy(how = How.XPATH, using = "//input[@name='name']")
     private SelenideElement emailInputField;
 
-    // локатор поля ввода пароля
     @FindBy(how = How.XPATH, using = "//input[@name='Пароль']")
     private SelenideElement passwordInpuField;
 
-    // локатор кнопки "Войти"
     @FindBy(how = How.XPATH, using = "//button[text()='Войти']")
     private SelenideElement signInButton;
 
-    // локатор ссылки "Восстановить пароль"
     @FindBy(how = How.XPATH, using = "//a[text()='Восстановить пароль']")
     private SelenideElement passwordRecoveryLink;
 
@@ -37,7 +32,6 @@ public class LoginPage extends Header {
     }
 
     public void setEmail(String email) {
-        // баг с анимацией
         while (!Objects.equals(emailInputField.getValue(), email)) {
             emailInputField.shouldBe(Condition.editable).setValue(email);
         }
@@ -62,5 +56,4 @@ public class LoginPage extends Header {
     public void clickPasswordRecoveryLink() {
         passwordRecoveryLink.click();
     }
-
 }

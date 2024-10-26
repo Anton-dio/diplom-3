@@ -3,8 +3,8 @@ package site.stellarburgers;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.*;
-import site.stellarburgers.model.ConstructorPage;
-import site.stellarburgers.model.MainPage;
+import site.stellarburgers.model.ConstructorSection;
+import site.stellarburgers.model.MainSection;
 
 import static com.codeborne.selenide.Selenide.*;
 import static site.stellarburgers.Browser.browserChoice;
@@ -13,8 +13,8 @@ import static site.stellarburgers.Browser.closeNotChromeBrowser;
 @DisplayName("Вкладки конструктора")
 public class SectionsTest {
 
-    MainPage mainPage;
-    ConstructorPage constructorPage;
+    MainSection mainPage;
+    ConstructorSection constructorPage;
 
     @BeforeClass
     public static void beforeAll() {
@@ -23,8 +23,8 @@ public class SectionsTest {
 
     @Before
     public void setUp() {
-        mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
-        constructorPage = page(ConstructorPage.class);
+        mainPage = open(MainSection.MAIN_PAGE_URL, MainSection.class);
+        constructorPage = page(ConstructorSection.class);
     }
 
     @After

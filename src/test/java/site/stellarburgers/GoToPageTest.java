@@ -5,8 +5,8 @@ import io.qameta.allure.junit4.DisplayName;
 import junitparams.JUnitParamsRunner;
 import org.junit.*;
 import org.junit.runner.RunWith;
-import site.stellarburgers.model.LoginPage;
-import site.stellarburgers.model.MainPage;
+import site.stellarburgers.model.LoginSection;
+import site.stellarburgers.model.MainSection;
 
 import static com.codeborne.selenide.Selenide.*;
 import static site.stellarburgers.Browser.*;
@@ -15,8 +15,8 @@ import static site.stellarburgers.Browser.*;
 @DisplayName("Переходы на страницы")
 public class GoToPageTest {
 
-    MainPage mainPage;
-    LoginPage loginPage;
+    MainSection mainPage;
+    LoginSection loginPage;
 
     @BeforeClass
     public static void beforeAll() {
@@ -25,8 +25,8 @@ public class GoToPageTest {
 
     @Before
     public void setUp() {
-        mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
-        loginPage = page(LoginPage.class);
+        mainPage = open(MainSection.MAIN_PAGE_URL, MainSection.class);
+        loginPage = page(LoginSection.class);
     }
 
     @After
@@ -43,7 +43,7 @@ public class GoToPageTest {
     @DisplayName("Переход в личный кабинет")
     public void goToPersonalAccount() {
         mainPage.clickPersonalAccountLink();
-        Assert.assertEquals(WebDriverRunner.url(), LoginPage.LOGIN_PAGE_URL);
+        Assert.assertEquals(WebDriverRunner.url(), LoginSection.LOGIN_PAGE_URL);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class GoToPageTest {
     public void goToConstructorFromPersonalAccount() {
         mainPage.clickPersonalAccountLink();
         loginPage.clickConstructorLink();
-        Assert.assertEquals(WebDriverRunner.url(), MainPage.MAIN_PAGE_URL);
+        Assert.assertEquals(WebDriverRunner.url(), MainSection.MAIN_PAGE_URL);
     }
 
     @Test
@@ -59,6 +59,6 @@ public class GoToPageTest {
     public void goToConstructorFromPersonalAccountByLogo() {
         mainPage.clickPersonalAccountLink();
         loginPage.clickLogoLink();
-        Assert.assertEquals(WebDriverRunner.url(), MainPage.MAIN_PAGE_URL);
+        Assert.assertEquals(WebDriverRunner.url(), MainSection.MAIN_PAGE_URL);
     }
 }

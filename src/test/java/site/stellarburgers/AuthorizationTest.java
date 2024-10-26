@@ -1,4 +1,4 @@
-package site.stellarburgers;
+package  site.stellarburgers;
 
 import io.qameta.allure.junit4.DisplayName;
 import junitparams.JUnitParamsRunner;
@@ -9,18 +9,18 @@ import site.stellarburgers.model.*;
 import static com.codeborne.selenide.Selenide.*;
 import static site.stellarburgers.Browser.browserChoice;
 import static site.stellarburgers.Browser.closeNotChromeBrowser;
-import static site.stellarburgers.generator.UserGenerator.*;
-import static site.stellarburgers.generator.UserApi.*;
+import static site.stellarburgers.generator.UserDataGenerator.*;
+import static site.stellarburgers.generator.UserApiService.*;
 
 @RunWith(JUnitParamsRunner.class)
 @DisplayName("Авторизация")
 public class AuthorizationTest {
 
-    MainPage mainPage;
-    LoginPage loginPage;
-    RegistrationPage registrationPage;
-    PasswordRecoveryPage passwordRecoveryPage;
-    PersonalAccountPage personalAccountPage;
+    MainSection mainPage;
+    LoginSection loginPage;
+    RegistrationSection registrationPage;
+    PasswordRecoverySection passwordRecoveryPage;
+    PersonalAccountSection personalAccountPage;
 
     private static int user;
 
@@ -32,11 +32,11 @@ public class AuthorizationTest {
 
     @Before
     public void setUp() {
-        mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
-        loginPage = page(LoginPage.class);
-        registrationPage = page(RegistrationPage.class);
-        passwordRecoveryPage = page(PasswordRecoveryPage.class);
-        personalAccountPage = page(PersonalAccountPage.class);
+        mainPage = open(MainSection.MAIN_PAGE_URL, MainSection.class);
+        loginPage = page(LoginSection.class);
+        registrationPage = page(RegistrationSection.class);
+        passwordRecoveryPage = page(PasswordRecoverySection.class);
+        personalAccountPage = page(PersonalAccountSection.class);
     }
 
     @After
@@ -48,9 +48,6 @@ public class AuthorizationTest {
     public static void afterAll() {
         deleteUser(user);
         closeNotChromeBrowser();
-    }
-
-    private static void deleteUser(int user) {
     }
 
     @Test

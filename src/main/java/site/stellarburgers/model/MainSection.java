@@ -1,22 +1,17 @@
 package site.stellarburgers.model;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-
-
-public class MainPage extends Header {
+public class MainSection extends HeaderSection {
 
     public final static String MAIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/";
 
-    // локатор кнопки "Войти в аккаунт"
     @FindBy(how = How.XPATH, using = "//button[text()='Войти в аккаунт']")
     private SelenideElement signInButton;
 
-    // локатор кнопки "Оформить заказ"
     @FindBy(how = How.XPATH, using = "//button[text()='Оформить заказ']")
     private SelenideElement checkoutButton;
 
@@ -32,5 +27,4 @@ public class MainPage extends Header {
     public boolean checkIsSignInButtonEnabled() {
         return signInButton.isEnabled();
     }
-
 }

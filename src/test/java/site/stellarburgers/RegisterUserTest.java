@@ -4,22 +4,23 @@ import io.qameta.allure.junit4.DisplayName;
 import junitparams.JUnitParamsRunner;
 import org.junit.*;
 import org.junit.runner.RunWith;
-import site.stellarburgers.model.LoginPage;
-import site.stellarburgers.model.MainPage;
-import site.stellarburgers.model.RegistrationPage;
+import site.stellarburgers.model.LoginSection;
+import site.stellarburgers.model.MainSection;
+import site.stellarburgers.model.RegistrationSection;
 
 import static com.codeborne.selenide.Selenide.*;
 import static site.stellarburgers.Browser.browserChoice;
 import static site.stellarburgers.Browser.closeNotChromeBrowser;
-import static site.stellarburgers.generator.UserGenerator.*;
+import static site.stellarburgers.generator.UserDataGenerator.*;
+import static site.stellarburgers.generator.UserApiService.*;
 
 @RunWith(JUnitParamsRunner.class)
 @DisplayName("Регистрация")
 public class RegisterUserTest {
 
-    MainPage mainPage;
-    LoginPage loginPage;
-    RegistrationPage registrationPage;
+    MainSection mainPage;
+    LoginSection loginPage;
+    RegistrationSection registrationPage;
     String newEmail;
 
     @BeforeClass
@@ -29,21 +30,24 @@ public class RegisterUserTest {
 
     @Before
     public void setUp() {
-        mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
+        mainPage = open(MainSection.MAIN_PAGE_URL, MainSection.class);
         mainPage.clickSignInButton();
 
-        loginPage = page(LoginPage.class);
+        loginPage = page(LoginSection.class);
         loginPage.clickRegisterLink();
 
-        registrationPage = page(RegistrationPage.class);
+        registrationPage = page(RegistrationSection.class);
         newEmail = getNewRandomEmail();
     }
 
     @After
     public void tearDown(){
         // Удаление пользователя после каждого теста
-        registrationPage.deleteUser(newEmail);
+        deleteUser(newEmail);
         clearBrowserLocalStorage();
+    }
+
+    private void deleteUser(String newEmail) {
     }
 
     @AfterClass
