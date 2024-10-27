@@ -48,6 +48,7 @@ public class RegisterUserTest {
     }
 
     private void deleteUser(String newEmail) {
+         deleteUser(newEmail);
     }
 
     @AfterClass

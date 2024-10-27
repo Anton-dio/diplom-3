@@ -1,31 +1,41 @@
 package site.stellarburgers.generator;
 
-import io.restassured.response.Response;
+import io.qameta.allure.Step;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.RequestSpecification;
 import site.stellarburgers.model.User;
 
 import static io.restassured.RestAssured.given;
 
 public class UserApiService {
 
+    private static final String BASE_URL = "https://your-api-url.com";
+    private static final String USERS_PATH = "/api/users";
+
     public static int createUser(User user) {
-        Response response = given()
+        ValidatableResponse response = given()
                 .contentType("application/json")
                 .body(user)
                 .when()
-                .post("/api/users")
-                .then()
-                .extract()
-                .response();
+                .post(USERS_PATH)
+                .then();
 
-        return response.jsonPath().get("id");
+        return response.extract().jsonPath().get("id");
     }
 
-    public static void deleteUser(int userId) {
-        given()
+    @Step("Удаление пользователя")
+    public static ValidatableResponse deleteUser(int userId) {
+        return given()
                 .pathParam("id", userId)
                 .when()
-                .delete("/api/users/{id}")
-                .then()
-                .statusCode(200);
+                .delete(USERS_PATH + "/{id}")
+                .then();
+    }
+
+    private static RequestSpecification getSpec(String bearerPlusToken) {
+        return given()
+                .baseUri(BASE_URL)
+                .header("Authorization", bearerPlusToken)
+                .contentType("application/json");
     }
 }
