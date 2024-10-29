@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import site.stellarburgers.model.LoginSection;
 import site.stellarburgers.model.MainSection;
 import site.stellarburgers.model.RegistrationSection;
+import site.stellarburgers.model.User;
 
 import static com.codeborne.selenide.Selenide.*;
 import static site.stellarburgers.Browser.browserChoice;
@@ -22,6 +23,7 @@ public class RegisterUserTest {
     LoginSection loginPage;
     RegistrationSection registrationPage;
     String newEmail;
+    int userId;
 
     @BeforeClass
     public static void beforeAll() {
@@ -38,17 +40,17 @@ public class RegisterUserTest {
 
         registrationPage = page(RegistrationSection.class);
         newEmail = getNewRandomEmail();
+
+        // Создание пользователя перед тестом
+        User user = new User(DEFAULT_NAME, newEmail, DEFAULT_PASSWORD);
+        userId = createUser(user);
     }
 
     @After
     public void tearDown(){
         // Удаление пользователя после каждого теста
-        deleteUser(newEmail);
+        deleteUser(userId);
         clearBrowserLocalStorage();
-    }
-
-    private void deleteUser(String newEmail) {
-         deleteUser(newEmail);
     }
 
     @AfterClass
