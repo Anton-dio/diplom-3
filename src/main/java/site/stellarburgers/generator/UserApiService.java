@@ -11,10 +11,11 @@ public class UserApiService {
 
     private static final String BASE_URL = "https://your-api-url.com";
     private static final String USERS_PATH = "/api/users";
+    private static final String LOGIN_PATH = "/api/auth/login";
 
     public static int createUser(User user) {
         ValidatableResponse response = given()
-                .contentType("application/json")
+                .spec(getSpec(null))
                 .body(user)
                 .when()
                 .post(USERS_PATH)
@@ -24,12 +25,24 @@ public class UserApiService {
     }
 
     @Step("Удаление пользователя")
-    public static ValidatableResponse deleteUser(int userId) {
+    public static ValidatableResponse deleteUser(int userId, String token) {
         return given()
+                .spec(getSpec("Bearer " + token))
                 .pathParam("id", userId)
                 .when()
                 .delete(USERS_PATH + "/{id}")
                 .then();
+    }
+
+    public static String loginUser(User user) {
+        ValidatableResponse response = given()
+                .spec(getSpec(null))
+                .body(user)
+                .when()
+                .post(LOGIN_PATH)
+                .then();
+
+        return response.extract().jsonPath().get("accessToken");
     }
 
     private static RequestSpecification getSpec(String bearerPlusToken) {

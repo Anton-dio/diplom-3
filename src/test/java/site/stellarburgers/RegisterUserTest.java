@@ -24,6 +24,7 @@ public class RegisterUserTest {
     RegistrationSection registrationPage;
     String newEmail;
     int userId;
+    String token;
 
     @BeforeClass
     public static void beforeAll() {
@@ -44,12 +45,15 @@ public class RegisterUserTest {
         // Создание пользователя перед тестом
         User user = new User(DEFAULT_NAME, newEmail, DEFAULT_PASSWORD);
         userId = createUser(user);
+
+        // Логин пользователя для получения токена
+        token = loginUser(user);
     }
 
     @After
     public void tearDown(){
         // Удаление пользователя после каждого теста
-        deleteUser(userId);
+        deleteUser(userId, token);
         clearBrowserLocalStorage();
     }
 

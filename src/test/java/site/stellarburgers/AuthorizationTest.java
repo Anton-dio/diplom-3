@@ -1,10 +1,12 @@
-package  site.stellarburgers;
+package site.stellarburgers;
 
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.response.ValidatableResponse;
 import junitparams.JUnitParamsRunner;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import site.stellarburgers.model.*;
+import site.stellarburgers.model.User;
 
 import static com.codeborne.selenide.Selenide.*;
 import static site.stellarburgers.Browser.browserChoice;
@@ -22,12 +24,16 @@ public class AuthorizationTest {
     PasswordRecoverySection passwordRecoveryPage;
     PersonalAccountSection personalAccountPage;
 
-    private static int user;
+    private static int userId;
+    private static String token;
 
     @BeforeClass
     public static void beforeAll() {
         browserChoice();
-        user = createUser(new User(WORKING_EMAIL, DEFAULT_PASSWORD, DEFAULT_NAME));
+        User user = new User(DEFAULT_NAME, getNewRandomEmail(), DEFAULT_PASSWORD);
+        userId = createUser(user);
+        token = loginUser(user);
+        Assert.assertNotEquals(0, userId);
     }
 
     @Before
@@ -46,7 +52,9 @@ public class AuthorizationTest {
 
     @AfterClass
     public static void afterAll() {
-        deleteUser(user);
+        deleteUser(userId, token);
+        ValidatableResponse response = deleteUser(userId, token);
+        Assert.assertEquals(200, response.extract().statusCode());
         closeNotChromeBrowser();
     }
 
