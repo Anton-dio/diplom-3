@@ -5,8 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class Browser {
@@ -16,9 +15,12 @@ public class Browser {
 
     static {
         properties = new Properties();
-        try (FileInputStream fis = new FileInputStream("config.properties")) {
-            properties.load(fis);
-        } catch (IOException e) {
+        try (InputStream input = Browser.class.getClassLoader().getResourceAsStream("config.properties")) {
+            if (input == null) {
+                throw new RuntimeException("Unable to find config.properties");
+            }
+            properties.load(input);
+        } catch (Exception e) {
             System.err.println("config.properties file not found: " + e.getMessage());
         }
     }

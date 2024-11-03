@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 
 public class UserApiService {
 
-    private static final String BASE_URL = "https://your-api-url.com";
+    private static final String BASE_URL = "https://stellarburgers.nomoreparties.site/api";
     private static final String USERS_PATH = "/api/users";
     private static final String LOGIN_PATH = "/api/auth/login";
 
@@ -46,9 +46,14 @@ public class UserApiService {
     }
 
     private static RequestSpecification getSpec(String bearerPlusToken) {
-        return given()
+        RequestSpecification spec = given()
                 .baseUri(BASE_URL)
-                .header("Authorization", bearerPlusToken)
                 .contentType("application/json");
+
+        if (bearerPlusToken != null) {
+            spec.header("Authorization", bearerPlusToken);
+        }
+
+        return spec;
     }
 }
